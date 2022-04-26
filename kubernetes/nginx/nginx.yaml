@@ -1,13 +1,8 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: nginx
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx-deployment
-  namespace: nginx
 spec:
   selector:
     matchLabels:
@@ -34,8 +29,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-service
-  namespace: nginx
+  name: nginx-service  
 spec:
   selector:
     app: nginx
@@ -44,45 +38,3 @@ spec:
     protocol: TCP
     targetPort: 80
   type: LoadBalancer
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: nginx-ingress
-  namespace: nginx
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-spec:
-  # Un-comment this, if you have succesfully issued your certificate
-  tls:
-  - hosts:
-      - web.gemas.duckdns.org
-  #Change the secret name to ssl-cert-production 
-  #for a valid, green certificate in your browser
-    secretName: certificate-secret
-  ingressClassName: nginx
-  rules:
-  - host: web.gemas.duckdns.org
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service: 
-            name: nginx-service
-            port:
-              number: 80
-
----
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: nginx-certificate
-  namespace: nginx
-spec:
-  dnsNames:
-    - web.gemas.duckdns.org
-  secretName: certificate-secret
-  issuerRef:
-    name: letsencrypt-cluster-issuer
-    kind: ClusterIssuer
