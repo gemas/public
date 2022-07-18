@@ -245,7 +245,7 @@ function Invoke-WinsInstaller {
                 }
                 else {
                     try {
-                        $env:VERSION = $(curl.exe --connect-timeout 60 $env:CURL_CAFLAG -sfL "https://api.github.com/repos/rancher/wins/releases/latest" | ConvertFrom-Json).tag_name
+                        $env:VERSION = $(curl.exe --insecure --connect-timeout 60 $env:CURL_CAFLAG -sfL "https://api.github.com/repos/rancher/wins/releases/latest" | ConvertFrom-Json).tag_name
                     }
                     catch {
                         Write-LogInfo "Error contacting GitHub to retrieve the latest version, falling back to version: $FALLBACK"
@@ -323,7 +323,7 @@ function Invoke-WinsInstaller {
 
             $retries = 0  
             while ($retries -lt 6) {
-                $responseCode = $(curl.exe --connect-timeout 60 --max-time 300 --write-out "%{http_code}\n" $env:CURL_BIN_CAFLAG -sfL "$($env:CATTLE_AGENT_BINARY_URL)" -o "$env:CATTLE_AGENT_BIN_PREFIX/bin/wins.exe")
+                $responseCode = $(curl.exe --insecure --connect-timeout 60 --max-time 300 --write-out "%{http_code}\n" $env:CURL_BIN_CAFLAG -sfL "$($env:CATTLE_AGENT_BINARY_URL)" -o "$env:CATTLE_AGENT_BIN_PREFIX/bin/wins.exe")
                 
                 switch ( $responseCode ) {
                     { "ok200", 200 } {
