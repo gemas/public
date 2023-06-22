@@ -45,6 +45,7 @@ kind: Job
 metadata:
   name: countdown
 spec:
+  ttlSecondsAfterFinished: 5
   template:
     metadata:
       name: countdown
