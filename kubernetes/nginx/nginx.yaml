@@ -43,9 +43,7 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  generateName: test-name-
-  annotations:
-    argocd.argoproj.io/sync-options: Replace=true
+  generateName: test-name-    
 spec:  
   template:
     metadata:
