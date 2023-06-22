@@ -67,7 +67,7 @@ spec:
           - name: test-config-volume
             mountPath: /etc/nginx/file.txt
             subPath: file.txt
-        restartPolicy: Never
+      restartPolicy: Never
 ---
 apiVersion: v1
 kind: ConfigMap
