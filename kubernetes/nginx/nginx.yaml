@@ -43,7 +43,7 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: countdown
+  generateName: test-name-
   annotations:
     argocd.argoproj.io/sync-options: Replace=true
 spec:  
