@@ -75,4 +75,4 @@ metadata:
   name: test-config  
 data:
   file.txt: |
-    dit is een test
+    dit is een test 2
