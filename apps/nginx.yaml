@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: my-app
+  namespace: argocd  # This must match where Argo CD is installed
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/gemas/public.git
+    targetRevision: HEAD
+    path: kubernetes/nginx  # Path in the repo where the manifests or Helm chart is
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: my-namespace
+
+  syncPolicy:
+    automated:       # Enables automatic syncing
+      prune: true    # Deletes resources that are no longer defined
+      selfHeal: true # Reverts out-of-band changes
+    syncOptions:
+      - CreateNamespace=true  # Create the namespace if it doesn't exist
