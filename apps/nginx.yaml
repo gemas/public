@@ -13,7 +13,7 @@ spec:
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: my-namespace
+    namespace: nginx
 
   syncPolicy:
     automated:       # Enables automatic syncing
