@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: nginx
+  name: frontend
   namespace: argocd  # This must match where Argo CD is installed
 spec:
   project: default
