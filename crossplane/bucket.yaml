@@ -12,6 +12,7 @@ spec:
     labels:
       app: crossplane 
       test: geert
+      zoek: mij
   providerConfigRef:
     name: default
   
