@@ -11,9 +11,6 @@ spec:
     forceDestroy: true
     labels:
       app: crossplane 
-      test: geert
-      zoek: mij
-      hier: niet
   providerConfigRef:
     name: default
   
