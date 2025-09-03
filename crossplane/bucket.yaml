@@ -9,6 +9,8 @@ spec:
     location: europe-west1
     uniformBucketLevelAccess: true
     forceDestroy: true
+    labels:
+      app: crossplane 
   providerConfigRef:
     name: default
   
