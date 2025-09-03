@@ -7,7 +7,7 @@ metadata:
 spec:
   forProvider:
     location: europe-west1
-    uniformBucketLevelAccess: jaaaa
+    uniformBucketLevelAccess: true
     forceDestroy: true
     labels:
       app: crossplane 
