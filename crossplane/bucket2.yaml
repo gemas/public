@@ -8,7 +8,7 @@ spec:
   forProvider:
     location: europe-west1
     uniformBucketLevelAccess: true
-    forceDestroy: sssss
+    forceDestroy: true
     labels:
       app: crossplane 
   providerConfigRef:
