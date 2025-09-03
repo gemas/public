@@ -1,13 +1,14 @@
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx-deployment
+  labels:
+    app: nginx
 spec:
+  replicas: 2
   selector:
     matchLabels:
       app: nginx
-  replicas: 3 # tells deployment to run 2 pods matching the template
   template:
     metadata:
       labels:
@@ -15,63 +16,19 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: nginx
+        image: nginx:latest
         ports:
         - containerPort: 80
-        resources:
-          requests:
-            cpu: "0.02"
-            memory: "10Mi"
-          limits:
-            memory: "200Mi"
-            cpu: "0.05"
-# ---
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: nginx-service  
-# spec:
-#   selector:
-#     app: nginx
-#   ports:
-#   - port: 80
-#     protocol: TCP
-#     targetPort: 80
-#   type: ClusterIP
-# ---
-# apiVersion: batch/v1
-# kind: Job
-# metadata:
-#   generateName: test-name-    
-#   annotations:
-#     argocd.argoproj.io/hook: PostSync
-#     argocd.argoproj.io/hook-delete-policy: HookSucceeded
-# spec:  
-#   template:
-#     metadata:
-#       name: countdown    
-#     spec:
-#       volumes:
-#         - name: test-config-volume
-#           configMap:
-#             name: test-config  
-#       containers:
-#       - name: counter
-#         image: centos:7
-#         command:
-#          - "bin/bash"
-#          - "-c"
-#          - "for i in 11 10 9 8 7 6 5 4 3 2 1 ; do echo $i ; done && cat /etc/nginx/file.txt"        
-#         volumeMounts:
-#           - name: test-config-volume
-#             mountPath: /etc/nginx/file.txt
-#             subPath: file.txt
-#       restartPolicy: Never
-# ---
-# apiVersion: v1
-# kind: ConfigMap
-# metadata:
-#   name: test-config  
-# data:
-#   file.txt: |
-#     dit is een test
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  selector:
+    app: nginx
+  type: ClusterIP
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
