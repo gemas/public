@@ -11,6 +11,7 @@ spec:
     forceDestroy: true
     labels:
       app: crossplane 
+      test: name 
   providerConfigRef:
     name: default
   
