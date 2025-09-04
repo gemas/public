@@ -1,16 +1,16 @@
-# apiVersion: storage.gcp.upbound.io/v1beta1
-# kind: Bucket
-# metadata:
-#   name: crossplane-bucket-ddd
-#   labels:
-#     docs.crossplane.io/example: provider-gcp
-# spec:
-#   forProvider:
-#     location: europe-west1
-#     uniformBucketLevelAccess: true
-#     forceDestroy: true
-#     labels:
-#       app: crossplane 
-#   providerConfigRef:
-#     name: default
+apiVersion: storage.gcp.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  name: crossplane-bucket-ddd
+  labels:
+    docs.crossplane.io/example: provider-gcp
+spec:
+  forProvider:
+    location: europe-west1
+    uniformBucketLevelAccess: dddd
+    forceDestroy: true
+    labels:
+      app: crossplane 
+  providerConfigRef:
+    name: default
   
